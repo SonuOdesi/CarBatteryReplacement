@@ -222,15 +222,20 @@ class="img-fluid rounded" alt="Vehicle Service">
 
 <p>Fill out the form and we'll contact you within minutes.</p>
 
-<form>
-<input class="form-control mb-3" placeholder="Your Name">
-<input class="form-control mb-3" placeholder="Phone Number">
-<input class="form-control mb-3" placeholder="Vehicle Model">
-<input class="form-control mb-3" placeholder="Your Location">
+<form id="quoteForm">
 
-<button class="btn btn-main w-100">
+<input id="name" class="form-control mb-3" placeholder="Your Name" required>
+
+<input id="phone" class="form-control mb-3" placeholder="Phone Number" required>
+
+<input id="vehicle" class="form-control mb-3" placeholder="Vehicle Model" required>
+
+<input id="location" class="form-control mb-3" placeholder="Your Location" required>
+
+<button type="button" onclick="sendWhatsApp()" class="btn btn-main w-100">
 Request Service
 </button>
+
 </form>
 
 </div>
@@ -270,6 +275,39 @@ Chat on WhatsApp
 WhatsApp
 </a>
 </div>
+<script>
 
+function sendWhatsApp() {
+
+    var name = document.getElementById("name").value;
+    var phone = document.getElementById("phone").value;
+    var vehicle = document.getElementById("vehicle").value;
+    var location = document.getElementById("location").value;
+
+    if(name=="" || phone=="" || vehicle=="" || location==""){
+        alert("Please fill all fields");
+        return;
+    }
+
+    var message =
+`🚗 New Battery Service Request
+
+Name: ${name}
+Phone: ${phone}
+Vehicle: ${vehicle}
+Location: ${location}`;
+
+    var whatsappNumber = "919818448293";
+
+    var url =
+    "https://wa.me/" +
+    whatsappNumber +
+    "?text=" +
+    encodeURIComponent(message);
+
+    window.open(url, "_blank");
+}
+
+</script>
 </body>
 </html>
